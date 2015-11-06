@@ -628,15 +628,15 @@ else:
 # Init / Error routines ----------------------------------------------------
 
 proc FreeImage_Initialise*(load_local_plugins_only: BOOL) {.
-    importc: "FreeImage_Initialise", dynlib: FreeImageLib.}
-proc FreeImage_DeInitialise*() {.importc: "FreeImage_DeInitialise", 
+    importc: "_FreeImage_Initialise@4", dynlib: FreeImageLib.}
+proc FreeImage_DeInitialise*() {.importc: "_FreeImage_DeInitialise@0",
                                  dynlib: FreeImageLib.}
 # Version routines ---------------------------------------------------------
 
-proc FreeImage_GetVersion*(): cstring {.importc: "FreeImage_GetVersion", 
+proc FreeImage_GetVersion*(): cstring {.importc: "_FreeImage_GetVersion@0",
                                         dynlib: FreeImageLib.}
 proc FreeImage_GetCopyrightMessage*(): cstring {.
-    importc: "FreeImage_GetCopyrightMessage", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetCopyrightMessage@0", dynlib: FreeImageLib.}
 # Message output functions -------------------------------------------------
 
 type 
@@ -645,539 +645,539 @@ type
       msg: cstring)
 
 proc FreeImage_SetOutputMessageStdCall*(omf: FreeImage_OutputMessageFunctionStdCall) {.
-    importc: "FreeImage_SetOutputMessageStdCall", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetOutputMessageStdCall@4", dynlib: FreeImageLib.}
 proc FreeImage_SetOutputMessage*(omf: FreeImage_OutputMessageFunction) {.
-    importc: "FreeImage_SetOutputMessage", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetOutputMessage@4", dynlib: FreeImageLib.}
 proc FreeImage_OutputMessageProc*(fif: cint; fmt: cstring) {.varargs, 
     importc: "FreeImage_OutputMessageProc", dynlib: FreeImageLib.}
 # Allocate / Clone / Unload routines ---------------------------------------
 
 proc FreeImage_Allocate*(width: cint; height: cint; bpp: cint; red_mask: cuint; 
                          green_mask: cuint; blue_mask: cuint): ptr FIBITMAP {.
-    importc: "FreeImage_Allocate", dynlib: FreeImageLib.}
+    importc: "_FreeImage_Allocate@24", dynlib: FreeImageLib.}
 proc FreeImage_AllocateT*(typen: FREE_IMAGE_TYPE; width: cint; height: cint; 
                           bpp: cint; red_mask: cuint; green_mask: cuint; 
                           blue_mask: cuint): ptr FIBITMAP {.
-    importc: "FreeImage_AllocateT", dynlib: FreeImageLib.}
+    importc: "_FreeImage_AllocateT@28", dynlib: FreeImageLib.}
 proc FreeImage_Clone*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_Clone", dynlib: FreeImageLib.}
-proc FreeImage_Unload*(dib: ptr FIBITMAP) {.importc: "FreeImage_Unload", 
+    importc: "_FreeImage_Clone@4", dynlib: FreeImageLib.}
+proc FreeImage_Unload*(dib: ptr FIBITMAP) {.importc: "_FreeImage_Unload@4",
     dynlib: FreeImageLib.}
 # Header loading routines
 
 proc FreeImage_HasPixels*(dib: ptr FIBITMAP): BOOL {.
-    importc: "FreeImage_HasPixels", dynlib: FreeImageLib.}
+    importc: "_FreeImage_HasPixels@4", dynlib: FreeImageLib.}
 # Load / Save routines -----------------------------------------------------
 
 proc FreeImage_Load*(fif: FREE_IMAGE_FORMAT; filename: cstring; flags: cint): ptr FIBITMAP {.
-    importc: "FreeImage_Load", dynlib: FreeImageLib.}
+    importc: "_FreeImage_Load@12", dynlib: FreeImageLib.}
 proc FreeImage_LoadU*(fif: FREE_IMAGE_FORMAT; filename: ptr uint16; flags: cint): ptr FIBITMAP {.
-    importc: "FreeImage_LoadU", dynlib: FreeImageLib.}
+    importc: "_FreeImage_LoadU@12", dynlib: FreeImageLib.}
 proc FreeImage_LoadFromHandle*(fif: FREE_IMAGE_FORMAT; io: ptr FreeImageIO; 
                                handle: fi_handle; flags: cint): ptr FIBITMAP {.
-    importc: "FreeImage_LoadFromHandle", dynlib: FreeImageLib.}
+    importc: "_FreeImage_LoadFromHandle@16", dynlib: FreeImageLib.}
 proc FreeImage_Save*(fif: FREE_IMAGE_FORMAT; dib: ptr FIBITMAP; 
                      filename: cstring; flags: cint): BOOL {.
-    importc: "FreeImage_Save", dynlib: FreeImageLib.}
+    importc: "_FreeImage_Save@16", dynlib: FreeImageLib.}
 proc FreeImage_SaveU*(fif: FREE_IMAGE_FORMAT; dib: ptr FIBITMAP; 
                       filename: ptr uint16; flags: cint): BOOL {.
-    importc: "FreeImage_SaveU", dynlib: FreeImageLib.}
+    importc: "_FreeImage_Save@16", dynlib: FreeImageLib.}
 proc FreeImage_SaveToHandle*(fif: FREE_IMAGE_FORMAT; dib: ptr FIBITMAP; 
                              io: ptr FreeImageIO; handle: fi_handle; flags: cint): BOOL {.
-    importc: "FreeImage_SaveToHandle", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SaveToHandle@20", dynlib: FreeImageLib.}
 # Memory I/O stream routines -----------------------------------------------
 
 proc FreeImage_OpenMemory*(data: ptr BYTE; size_in_bytes: DWORD): ptr FIMEMORY {.
-    importc: "FreeImage_OpenMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_OpenMemory@8", dynlib: FreeImageLib.}
 proc FreeImage_CloseMemory*(stream: ptr FIMEMORY) {.
-    importc: "FreeImage_CloseMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_CloseMemory@4", dynlib: FreeImageLib.}
 proc FreeImage_LoadFromMemory*(fif: FREE_IMAGE_FORMAT; stream: ptr FIMEMORY; 
                                flags: cint): ptr FIBITMAP {.
-    importc: "FreeImage_LoadFromMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_LoadFromMemory@12", dynlib: FreeImageLib.}
 proc FreeImage_SaveToMemory*(fif: FREE_IMAGE_FORMAT; dib: ptr FIBITMAP; 
                              stream: ptr FIMEMORY; flags: cint): BOOL {.
-    importc: "FreeImage_SaveToMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SaveToMemory@16", dynlib: FreeImageLib.}
 proc FreeImage_TellMemory*(stream: ptr FIMEMORY): clong {.
-    importc: "FreeImage_TellMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_TellMemory@4", dynlib: FreeImageLib.}
 proc FreeImage_SeekMemory*(stream: ptr FIMEMORY; offset: clong; origin: cint): BOOL {.
-    importc: "FreeImage_SeekMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SeekMemory@12", dynlib: FreeImageLib.}
 proc FreeImage_AcquireMemory*(stream: ptr FIMEMORY; data: ptr ptr BYTE; 
                               size_in_bytes: ptr DWORD): BOOL {.
-    importc: "FreeImage_AcquireMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_AcquireMemory@12", dynlib: FreeImageLib.}
 proc FreeImage_ReadMemory*(buffer: pointer; size: cuint; count: cuint; 
                            stream: ptr FIMEMORY): cuint {.
-    importc: "FreeImage_ReadMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ReadMemory@16", dynlib: FreeImageLib.}
 proc FreeImage_WriteMemory*(buffer: pointer; size: cuint; count: cuint; 
                             stream: ptr FIMEMORY): cuint {.
-    importc: "FreeImage_WriteMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_WriteMemory@16", dynlib: FreeImageLib.}
 proc FreeImage_LoadMultiBitmapFromMemory*(fif: FREE_IMAGE_FORMAT; 
     stream: ptr FIMEMORY; flags: cint): ptr FIMULTIBITMAP {.
-    importc: "FreeImage_LoadMultiBitmapFromMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_LoadMultiBitmapFromMemory@12", dynlib: FreeImageLib.}
 proc FreeImage_SaveMultiBitmapToMemory*(fif: FREE_IMAGE_FORMAT; 
                                         bitmap: ptr FIMULTIBITMAP; 
                                         stream: ptr FIMEMORY; flags: cint): BOOL {.
-    importc: "FreeImage_SaveMultiBitmapToMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SaveMultiBitmapToMemory@16", dynlib: FreeImageLib.}
 # Plugin Interface ---------------------------------------------------------
 
 proc FreeImage_RegisterLocalPlugin*(proc_address: FI_InitProc; format: cstring; 
                                     description: cstring; extension: cstring; 
                                     regexpr: cstring): FREE_IMAGE_FORMAT {.
-    importc: "FreeImage_RegisterLocalPlugin", dynlib: FreeImageLib.}
+    importc: "_FreeImage_RegisterLocalPlugin@20", dynlib: FreeImageLib.}
 #the FreeImage_RegisterLocalPlugin function is not actually exported on my system
 #so we are not going to import it
 discard """
 proc FreeImage_RegisterExternalPlugin*(path: cstring; format: cstring; 
                                        description: cstring; extension: cstring; 
                                        regexpr: cstring): FREE_IMAGE_FORMAT {.
-    importc: "FreeImage_RegisterExternalPlugin", dynlib: FreeImageLib.}
+    importc: "_FreeImage_RegisterExternalPlugin@20", dynlib: FreeImageLib.}
 """
-proc FreeImage_GetFIFCount*(): cint {.importc: "FreeImage_GetFIFCount", 
+proc FreeImage_GetFIFCount*(): cint {.importc: "_FreeImage_GetFIFCount@0",
                                       dynlib: FreeImageLib.}
 proc FreeImage_SetPluginEnabled*(fif: FREE_IMAGE_FORMAT; enable: BOOL): cint {.
-    importc: "FreeImage_SetPluginEnabled", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetPluginEnabled@8", dynlib: FreeImageLib.}
 proc FreeImage_IsPluginEnabled*(fif: FREE_IMAGE_FORMAT): cint {.
-    importc: "FreeImage_IsPluginEnabled", dynlib: FreeImageLib.}
+    importc: "_FreeImage_IsPluginEnabled@4", dynlib: FreeImageLib.}
 proc FreeImage_GetFIFFromFormat*(format: cstring): FREE_IMAGE_FORMAT {.
-    importc: "FreeImage_GetFIFFromFormat", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFIFFromFormat@4", dynlib: FreeImageLib.}
 proc FreeImage_GetFIFFromMime*(mime: cstring): FREE_IMAGE_FORMAT {.
-    importc: "FreeImage_GetFIFFromMime", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFIFFromMime@4", dynlib: FreeImageLib.}
 proc FreeImage_GetFormatFromFIF*(fif: FREE_IMAGE_FORMAT): cstring {.
-    importc: "FreeImage_GetFormatFromFIF", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFormatFromFIF@4", dynlib: FreeImageLib.}
 proc FreeImage_GetFIFExtensionList*(fif: FREE_IMAGE_FORMAT): cstring {.
-    importc: "FreeImage_GetFIFExtensionList", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFIFExtensionList@4", dynlib: FreeImageLib.}
 proc FreeImage_GetFIFDescription*(fif: FREE_IMAGE_FORMAT): cstring {.
-    importc: "FreeImage_GetFIFDescription", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFIFDescription@4", dynlib: FreeImageLib.}
 proc FreeImage_GetFIFRegExpr*(fif: FREE_IMAGE_FORMAT): cstring {.
-    importc: "FreeImage_GetFIFRegExpr", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFIFRegExpr@4", dynlib: FreeImageLib.}
 proc FreeImage_GetFIFMimeType*(fif: FREE_IMAGE_FORMAT): cstring {.
-    importc: "FreeImage_GetFIFMimeType", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFIFMimeType@4", dynlib: FreeImageLib.}
 proc FreeImage_GetFIFFromFilename*(filename: cstring): FREE_IMAGE_FORMAT {.
-    importc: "FreeImage_GetFIFFromFilename", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFIFFromFilename@4", dynlib: FreeImageLib.}
 proc FreeImage_GetFIFFromFilenameU*(filename: ptr uint16): FREE_IMAGE_FORMAT {.
-    importc: "FreeImage_GetFIFFromFilenameU", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFIFFromFilenameU@4", dynlib: FreeImageLib.}
 proc FreeImage_FIFSupportsReading*(fif: FREE_IMAGE_FORMAT): BOOL {.
-    importc: "FreeImage_FIFSupportsReading", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FIFSupportsReading@4", dynlib: FreeImageLib.}
 proc FreeImage_FIFSupportsWriting*(fif: FREE_IMAGE_FORMAT): BOOL {.
-    importc: "FreeImage_FIFSupportsWriting", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FIFSupportsWriting@4", dynlib: FreeImageLib.}
 proc FreeImage_FIFSupportsExportBPP*(fif: FREE_IMAGE_FORMAT; bpp: cint): BOOL {.
-    importc: "FreeImage_FIFSupportsExportBPP", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FIFSupportsExportBPP@8", dynlib: FreeImageLib.}
 proc FreeImage_FIFSupportsExportType*(fif: FREE_IMAGE_FORMAT; 
                                       typen: FREE_IMAGE_TYPE): BOOL {.
-    importc: "FreeImage_FIFSupportsExportType", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FIFSupportsExportType@8", dynlib: FreeImageLib.}
 proc FreeImage_FIFSupportsICCProfiles*(fif: FREE_IMAGE_FORMAT): BOOL {.
-    importc: "FreeImage_FIFSupportsICCProfiles", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FIFSupportsICCProfiles@4", dynlib: FreeImageLib.}
 proc FreeImage_FIFSupportsNoPixels*(fif: FREE_IMAGE_FORMAT): BOOL {.
-    importc: "FreeImage_FIFSupportsNoPixels", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FIFSupportsNoPixels@4", dynlib: FreeImageLib.}
 # Multipaging interface ----------------------------------------------------
 
 proc FreeImage_OpenMultiBitmap*(fif: FREE_IMAGE_FORMAT; filename: cstring; 
                                 create_new: BOOL; read_only: BOOL; 
                                 keep_cache_in_memory: BOOL; flags: cint): ptr FIMULTIBITMAP {.
-    importc: "FreeImage_OpenMultiBitmap", dynlib: FreeImageLib.}
+    importc: "_FreeImage_OpenMultiBitmap@24", dynlib: FreeImageLib.}
 proc FreeImage_OpenMultiBitmapFromHandle*(fif: FREE_IMAGE_FORMAT; 
     io: ptr FreeImageIO; handle: fi_handle; flags: cint): ptr FIMULTIBITMAP {.
-    importc: "FreeImage_OpenMultiBitmapFromHandle", dynlib: FreeImageLib.}
+    importc: "_FreeImage_OpenMultiBitmapFromHandle@16", dynlib: FreeImageLib.}
 proc FreeImage_SaveMultiBitmapToHandle*(fif: FREE_IMAGE_FORMAT; 
                                         bitmap: ptr FIMULTIBITMAP; 
                                         io: ptr FreeImageIO; handle: fi_handle; 
                                         flags: cint): BOOL {.
-    importc: "FreeImage_SaveMultiBitmapToHandle", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SaveMultiBitmapToHandle@20", dynlib: FreeImageLib.}
 proc FreeImage_CloseMultiBitmap*(bitmap: ptr FIMULTIBITMAP; flags: cint): BOOL {.
-    importc: "FreeImage_CloseMultiBitmap", dynlib: FreeImageLib.}
+    importc: "_FreeImage_CloseMultiBitmap@8", dynlib: FreeImageLib.}
 proc FreeImage_GetPageCount*(bitmap: ptr FIMULTIBITMAP): cint {.
-    importc: "FreeImage_GetPageCount", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetPageCount@4", dynlib: FreeImageLib.}
 proc FreeImage_AppendPage*(bitmap: ptr FIMULTIBITMAP; data: ptr FIBITMAP) {.
-    importc: "FreeImage_AppendPage", dynlib: FreeImageLib.}
+    importc: "_FreeImage_AppendPage@8", dynlib: FreeImageLib.}
 proc FreeImage_InsertPage*(bitmap: ptr FIMULTIBITMAP; page: cint; 
                            data: ptr FIBITMAP) {.
-    importc: "FreeImage_InsertPage", dynlib: FreeImageLib.}
+    importc: "_FreeImage_InsertPage@12", dynlib: FreeImageLib.}
 proc FreeImage_DeletePage*(bitmap: ptr FIMULTIBITMAP; page: cint) {.
-    importc: "FreeImage_DeletePage", dynlib: FreeImageLib.}
+    importc: "_FreeImage_DeletePage@8", dynlib: FreeImageLib.}
 proc FreeImage_LockPage*(bitmap: ptr FIMULTIBITMAP; page: cint): ptr FIBITMAP {.
-    importc: "FreeImage_LockPage", dynlib: FreeImageLib.}
+    importc: "_FreeImage_LockPage@8", dynlib: FreeImageLib.}
 proc FreeImage_UnlockPage*(bitmap: ptr FIMULTIBITMAP; data: ptr FIBITMAP; 
-                           changed: BOOL) {.importc: "FreeImage_UnlockPage", 
+                           changed: BOOL) {.importc: "_FreeImage_UnlockPage@12",
     dynlib: FreeImageLib.}
 proc FreeImage_MovePage*(bitmap: ptr FIMULTIBITMAP; target: cint; source: cint): BOOL {.
-    importc: "FreeImage_MovePage", dynlib: FreeImageLib.}
+    importc: "_FreeImage_MovePage@12", dynlib: FreeImageLib.}
 proc FreeImage_GetLockedPageNumbers*(bitmap: ptr FIMULTIBITMAP; pages: ptr cint; 
                                      count: ptr cint): BOOL {.
-    importc: "FreeImage_GetLockedPageNumbers", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetLockedPageNumbers@12", dynlib: FreeImageLib.}
 # Filetype request routines ------------------------------------------------
 
 proc FreeImage_GetFileType*(filename: cstring; size: cint): FREE_IMAGE_FORMAT {.
-    importc: "FreeImage_GetFileType", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFileType@8", dynlib: FreeImageLib.}
 proc FreeImage_GetFileTypeU*(filename: ptr uint16; size: cint): FREE_IMAGE_FORMAT {.
-    importc: "FreeImage_GetFileTypeU", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFileTypeU@8", dynlib: FreeImageLib.}
 proc FreeImage_GetFileTypeFromHandle*(io: ptr FreeImageIO; handle: fi_handle; 
                                       size: cint): FREE_IMAGE_FORMAT {.
-    importc: "FreeImage_GetFileTypeFromHandle", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFileTypeFromHandle@12", dynlib: FreeImageLib.}
 proc FreeImage_GetFileTypeFromMemory*(stream: ptr FIMEMORY; size: cint): FREE_IMAGE_FORMAT {.
-    importc: "FreeImage_GetFileTypeFromMemory", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetFileTypeFromMemory@8", dynlib: FreeImageLib.}
 # Image type request routine -----------------------------------------------
 
 proc FreeImage_GetImageType*(dib: ptr FIBITMAP): FREE_IMAGE_TYPE {.
-    importc: "FreeImage_GetImageType", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetImageType@4", dynlib: FreeImageLib.}
 # FreeImage helper routines ------------------------------------------------
 
-proc FreeImage_IsLittleEndian*(): BOOL {.importc: "FreeImage_IsLittleEndian", 
+proc FreeImage_IsLittleEndian*(): BOOL {.importc: "_FreeImage_IsLittleEndian@0",
     dynlib: FreeImageLib.}
 proc FreeImage_LookupX11Color*(szColor: cstring; nRed: ptr BYTE; 
                                nGreen: ptr BYTE; nBlue: ptr BYTE): BOOL {.
-    importc: "FreeImage_LookupX11Color", dynlib: FreeImageLib.}
+    importc: "_FreeImage_LookupX11Color@16", dynlib: FreeImageLib.}
 proc FreeImage_LookupSVGColor*(szColor: cstring; nRed: ptr BYTE; 
                                nGreen: ptr BYTE; nBlue: ptr BYTE): BOOL {.
-    importc: "FreeImage_LookupSVGColor", dynlib: FreeImageLib.}
+    importc: "_FreeImage_LookupSVGColor@16", dynlib: FreeImageLib.}
 # Pixel access routines ----------------------------------------------------
 
 proc FreeImage_GetBits*(dib: ptr FIBITMAP): ptr BYTE {.
-    importc: "FreeImage_GetBits", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetBits@4", dynlib: FreeImageLib.}
 proc FreeImage_GetScanLine*(dib: ptr FIBITMAP; scanline: cint): ptr BYTE {.
-    importc: "FreeImage_GetScanLine", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetScanLine@8", dynlib: FreeImageLib.}
 proc FreeImage_GetPixelIndex*(dib: ptr FIBITMAP; x: cuint; y: cuint; 
                               value: ptr BYTE): BOOL {.
-    importc: "FreeImage_GetPixelIndex", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetPixelIndex@16", dynlib: FreeImageLib.}
 proc FreeImage_GetPixelColor*(dib: ptr FIBITMAP; x: cuint; y: cuint; 
                               value: ptr RGBQUAD): BOOL {.
-    importc: "FreeImage_GetPixelColor", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetPixelColor@16", dynlib: FreeImageLib.}
 proc FreeImage_SetPixelIndex*(dib: ptr FIBITMAP; x: cuint; y: cuint; 
                               value: ptr BYTE): BOOL {.
-    importc: "FreeImage_SetPixelIndex", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetPixelIndex@16", dynlib: FreeImageLib.}
 proc FreeImage_SetPixelColor*(dib: ptr FIBITMAP; x: cuint; y: cuint; 
                               value: ptr RGBQUAD): BOOL {.
-    importc: "FreeImage_SetPixelColor", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetPixelColor@16", dynlib: FreeImageLib.}
 # DIB info routines --------------------------------------------------------
 
 proc FreeImage_GetColorsUsed*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetColorsUsed", dynlib: FreeImageLib.}
-proc FreeImage_GetBPP*(dib: ptr FIBITMAP): cuint {.importc: "FreeImage_GetBPP", 
+    importc: "_FreeImage_GetColorsUsed@4", dynlib: FreeImageLib.}
+proc FreeImage_GetBPP*(dib: ptr FIBITMAP): cuint {.importc: "_FreeImage_GetBPP@4",
     dynlib: FreeImageLib.}
 proc FreeImage_GetWidth*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetWidth", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetWidth@4", dynlib: FreeImageLib.}
 proc FreeImage_GetHeight*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetHeight", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetHeight@4", dynlib: FreeImageLib.}
 proc FreeImage_GetLine*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetLine", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetLine@4", dynlib: FreeImageLib.}
 proc FreeImage_GetPitch*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetPitch", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetPitch@4", dynlib: FreeImageLib.}
 proc FreeImage_GetDIBSize*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetDIBSize", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetDIBSize@4", dynlib: FreeImageLib.}
 proc FreeImage_GetPalette*(dib: ptr FIBITMAP): ptr RGBQUAD {.
-    importc: "FreeImage_GetPalette", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetPalette@4", dynlib: FreeImageLib.}
 proc FreeImage_GetDotsPerMeterX*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetDotsPerMeterX", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetDotsPerMeterX@4", dynlib: FreeImageLib.}
 proc FreeImage_GetDotsPerMeterY*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetDotsPerMeterY", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetDotsPerMeterY@4", dynlib: FreeImageLib.}
 proc FreeImage_SetDotsPerMeterX*(dib: ptr FIBITMAP; res: cuint) {.
-    importc: "FreeImage_SetDotsPerMeterX", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetDotsPerMeterX@8", dynlib: FreeImageLib.}
 proc FreeImage_SetDotsPerMeterY*(dib: ptr FIBITMAP; res: cuint) {.
-    importc: "FreeImage_SetDotsPerMeterY", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetDotsPerMeterY@8", dynlib: FreeImageLib.}
 proc FreeImage_GetInfoHeader*(dib: ptr FIBITMAP): ptr BITMAPINFOHEADER {.
-    importc: "FreeImage_GetInfoHeader", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetInfoHeader@4", dynlib: FreeImageLib.}
 proc FreeImage_GetInfo*(dib: ptr FIBITMAP): ptr BITMAPINFO {.
-    importc: "FreeImage_GetInfo", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetInfo@4", dynlib: FreeImageLib.}
 proc FreeImage_GetColorType*(dib: ptr FIBITMAP): FREE_IMAGE_COLOR_TYPE {.
-    importc: "FreeImage_GetColorType", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetColorType@4", dynlib: FreeImageLib.}
 proc FreeImage_GetRedMask*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetRedMask", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetRedMask@4", dynlib: FreeImageLib.}
 proc FreeImage_GetGreenMask*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetGreenMask", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetGreenMask@4", dynlib: FreeImageLib.}
 proc FreeImage_GetBlueMask*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetBlueMask", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetBlueMask@4", dynlib: FreeImageLib.}
 proc FreeImage_GetTransparencyCount*(dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetTransparencyCount", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetTransparencyCount@4", dynlib: FreeImageLib.}
 proc FreeImage_GetTransparencyTable*(dib: ptr FIBITMAP): ptr BYTE {.
-    importc: "FreeImage_GetTransparencyTable", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetTransparencyTable@4", dynlib: FreeImageLib.}
 proc FreeImage_SetTransparent*(dib: ptr FIBITMAP; enabled: BOOL) {.
-    importc: "FreeImage_SetTransparent", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetTransparent@8", dynlib: FreeImageLib.}
 proc FreeImage_SetTransparencyTable*(dib: ptr FIBITMAP; table: ptr BYTE; 
                                      count: cint) {.
-    importc: "FreeImage_SetTransparencyTable", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetTransparencyTable@12", dynlib: FreeImageLib.}
 proc FreeImage_IsTransparent*(dib: ptr FIBITMAP): BOOL {.
-    importc: "FreeImage_IsTransparent", dynlib: FreeImageLib.}
+    importc: "_FreeImage_IsTransparent@4", dynlib: FreeImageLib.}
 proc FreeImage_SetTransparentIndex*(dib: ptr FIBITMAP; index: cint) {.
-    importc: "FreeImage_SetTransparentIndex", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetTransparentIndex@8", dynlib: FreeImageLib.}
 proc FreeImage_GetTransparentIndex*(dib: ptr FIBITMAP): cint {.
-    importc: "FreeImage_GetTransparentIndex", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetTransparentIndex@4", dynlib: FreeImageLib.}
 proc FreeImage_HasBackgroundColor*(dib: ptr FIBITMAP): BOOL {.
-    importc: "FreeImage_HasBackgroundColor", dynlib: FreeImageLib.}
+    importc: "_FreeImage_HasBackgroundColor@4", dynlib: FreeImageLib.}
 proc FreeImage_GetBackgroundColor*(dib: ptr FIBITMAP; bkcolor: ptr RGBQUAD): BOOL {.
-    importc: "FreeImage_GetBackgroundColor", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetBackgroundColor@8", dynlib: FreeImageLib.}
 proc FreeImage_SetBackgroundColor*(dib: ptr FIBITMAP; bkcolor: ptr RGBQUAD): BOOL {.
-    importc: "FreeImage_SetBackgroundColor", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetBackgroundColor@8", dynlib: FreeImageLib.}
 proc FreeImage_GetThumbnail*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_GetThumbnail", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetThumbnail@4", dynlib: FreeImageLib.}
 proc FreeImage_SetThumbnail*(dib: ptr FIBITMAP; thumbnail: ptr FIBITMAP): BOOL {.
-    importc: "FreeImage_SetThumbnail", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetThumbnail@8", dynlib: FreeImageLib.}
 # ICC profile routines -----------------------------------------------------
 
 proc FreeImage_GetICCProfile*(dib: ptr FIBITMAP): ptr FIICCPROFILE {.
-    importc: "FreeImage_GetICCProfile", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetICCProfile@4", dynlib: FreeImageLib.}
 proc FreeImage_CreateICCProfile*(dib: ptr FIBITMAP; data: pointer; size: clong): ptr FIICCPROFILE {.
-    importc: "FreeImage_CreateICCProfile", dynlib: FreeImageLib.}
+    importc: "_FreeImage_CreateICCProfile@12", dynlib: FreeImageLib.}
 proc FreeImage_DestroyICCProfile*(dib: ptr FIBITMAP) {.
-    importc: "FreeImage_DestroyICCProfile", dynlib: FreeImageLib.}
+    importc: "_FreeImage_DestroyICCProfile@4", dynlib: FreeImageLib.}
 # Line conversion routines -------------------------------------------------
 
 proc FreeImage_ConvertLine1To4*(target: ptr BYTE; source: ptr BYTE; 
                                 width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine1To4", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine1To4@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine8To4*(target: ptr BYTE; source: ptr BYTE; 
                                 width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine8To4", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine8To4@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine16To4_555*(target: ptr BYTE; source: ptr BYTE; 
                                      width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine16To4_555", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine16To4_555@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine16To4_565*(target: ptr BYTE; source: ptr BYTE; 
                                      width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine16To4_565", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine16To4_565@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine24To4*(target: ptr BYTE; source: ptr BYTE; 
                                  width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine24To4", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine24To4@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine32To4*(target: ptr BYTE; source: ptr BYTE; 
                                  width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine32To4", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine32To4@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine1To8*(target: ptr BYTE; source: ptr BYTE; 
                                 width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine1To8", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine1To8@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine4To8*(target: ptr BYTE; source: ptr BYTE; 
                                 width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine4To8", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine4To8@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine16To8_555*(target: ptr BYTE; source: ptr BYTE; 
                                      width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine16To8_555", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine16To8_555@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine16To8_565*(target: ptr BYTE; source: ptr BYTE; 
                                      width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine16To8_565", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine16To8_565@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine24To8*(target: ptr BYTE; source: ptr BYTE; 
                                  width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine24To8", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine24To8@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine32To8*(target: ptr BYTE; source: ptr BYTE; 
                                  width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine32To8", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine32To8@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine1To16_555*(target: ptr BYTE; source: ptr BYTE; 
                                      width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine1To16_555", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine1To16_555@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine4To16_555*(target: ptr BYTE; source: ptr BYTE; 
                                      width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine4To16_555", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine4To16_555@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine8To16_555*(target: ptr BYTE; source: ptr BYTE; 
                                      width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine8To16_555", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine8To16_555@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine16_565_To16_555*(target: ptr BYTE; source: ptr BYTE; 
-    width_in_pixels: cint) {.importc: "FreeImage_ConvertLine16_565_To16_555", 
+    width_in_pixels: cint) {.importc: "_FreeImage_ConvertLine16_565_To16_555@12",
                              dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine24To16_555*(target: ptr BYTE; source: ptr BYTE; 
                                       width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine24To16_555", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine24To16_555@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine32To16_555*(target: ptr BYTE; source: ptr BYTE; 
                                       width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine32To16_555", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine32To16_555@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine1To16_565*(target: ptr BYTE; source: ptr BYTE; 
                                      width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine1To16_565", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine1To16_565@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine4To16_565*(target: ptr BYTE; source: ptr BYTE; 
                                      width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine4To16_565", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine4To16_565@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine8To16_565*(target: ptr BYTE; source: ptr BYTE; 
                                      width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine8To16_565", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine8To16_565@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine16_555_To16_565*(target: ptr BYTE; source: ptr BYTE; 
-    width_in_pixels: cint) {.importc: "FreeImage_ConvertLine16_555_To16_565", 
+    width_in_pixels: cint) {.importc: "_FreeImage_ConvertLine16_555_To16_565@12",
                              dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine24To16_565*(target: ptr BYTE; source: ptr BYTE; 
                                       width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine24To16_565", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine24To16_565@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine32To16_565*(target: ptr BYTE; source: ptr BYTE; 
                                       width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine32To16_565", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine32To16_565@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine1To24*(target: ptr BYTE; source: ptr BYTE; 
                                  width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine1To24", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine1To24@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine4To24*(target: ptr BYTE; source: ptr BYTE; 
                                  width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine4To24", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine4To24@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine8To24*(target: ptr BYTE; source: ptr BYTE; 
                                  width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine8To24", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine8To24@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine16To24_555*(target: ptr BYTE; source: ptr BYTE; 
                                       width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine16To24_555", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine16To24_555@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine16To24_565*(target: ptr BYTE; source: ptr BYTE; 
                                       width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine16To24_565", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine16To24_565@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine32To24*(target: ptr BYTE; source: ptr BYTE; 
                                   width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine32To24", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine32To24@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine1To32*(target: ptr BYTE; source: ptr BYTE; 
                                  width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine1To32", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine1To32@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine4To32*(target: ptr BYTE; source: ptr BYTE; 
                                  width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine4To32", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine4To32@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine8To32*(target: ptr BYTE; source: ptr BYTE; 
                                  width_in_pixels: cint; palette: ptr RGBQUAD) {.
-    importc: "FreeImage_ConvertLine8To32", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine8To32@16", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine16To32_555*(target: ptr BYTE; source: ptr BYTE; 
                                       width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine16To32_555", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine16To32_555@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine16To32_565*(target: ptr BYTE; source: ptr BYTE; 
                                       width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine16To32_565", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine16To32_565@12", dynlib: FreeImageLib.}
 proc FreeImage_ConvertLine24To32*(target: ptr BYTE; source: ptr BYTE; 
                                   width_in_pixels: cint) {.
-    importc: "FreeImage_ConvertLine24To32", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertLine24To32@12", dynlib: FreeImageLib.}
 # Smart conversion routines ------------------------------------------------
 
 proc FreeImage_ConvertTo4Bits*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertTo4Bits", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertTo4Bits@4", dynlib: FreeImageLib.}
 proc FreeImage_ConvertTo8Bits*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertTo8Bits", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertTo8Bits@4", dynlib: FreeImageLib.}
 proc FreeImage_ConvertToGreyscale*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertToGreyscale", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertToGreyscale@4", dynlib: FreeImageLib.}
 proc FreeImage_ConvertTo16Bits555*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertTo16Bits555", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertTo16Bits555@4", dynlib: FreeImageLib.}
 proc FreeImage_ConvertTo16Bits565*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertTo16Bits565", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertTo16Bits565@4", dynlib: FreeImageLib.}
 proc FreeImage_ConvertTo24Bits*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertTo24Bits", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertTo24Bits@4", dynlib: FreeImageLib.}
 proc FreeImage_ConvertTo32Bits*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertTo32Bits", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertTo32Bits@4", dynlib: FreeImageLib.}
 proc FreeImage_ColorQuantize*(dib: ptr FIBITMAP; quantize: FREE_IMAGE_QUANTIZE): ptr FIBITMAP {.
-    importc: "FreeImage_ColorQuantize", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ColorQuantize@8", dynlib: FreeImageLib.}
 proc FreeImage_ColorQuantizeEx*(dib: ptr FIBITMAP; 
                                 quantize: FREE_IMAGE_QUANTIZE; 
                                 PaletteSize: cint; ReserveSize: cint; 
                                 ReservePalette: ptr RGBQUAD): ptr FIBITMAP {.
-    importc: "FreeImage_ColorQuantizeEx", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ColorQuantizeEx@20", dynlib: FreeImageLib.}
 proc FreeImage_Threshold*(dib: ptr FIBITMAP; T: BYTE): ptr FIBITMAP {.
-    importc: "FreeImage_Threshold", dynlib: FreeImageLib.}
+    importc: "_FreeImage_Threshold@8", dynlib: FreeImageLib.}
 proc FreeImage_Dither*(dib: ptr FIBITMAP; algorithm: eFREE_IMAGE_DITHER): ptr FIBITMAP {.
-    importc: "FreeImage_Dither", dynlib: FreeImageLib.}
+    importc: "_FreeImage_Dither@8", dynlib: FreeImageLib.}
 proc FreeImage_ConvertFromRawBits*(bits: ptr BYTE; width: cint; height: cint; 
                                    pitch: cint; bpp: cuint; red_mask: cuint; 
                                    green_mask: cuint; blue_mask: cuint; 
                                    topdown: BOOL): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertFromRawBits", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertFromRawBits@36", dynlib: FreeImageLib.}
 proc FreeImage_ConvertToRawBits*(bits: ptr BYTE; dib: ptr FIBITMAP; pitch: cint; 
                                  bpp: cuint; red_mask: cuint; green_mask: cuint; 
                                  blue_mask: cuint; topdown: BOOL) {.
-    importc: "FreeImage_ConvertToRawBits", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertToRawBits@32", dynlib: FreeImageLib.}
 proc FreeImage_ConvertToFloat*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertToFloat", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertToFloat@4", dynlib: FreeImageLib.}
 proc FreeImage_ConvertToRGBF*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertToRGBF", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertToRGBF@4", dynlib: FreeImageLib.}
 proc FreeImage_ConvertToUINT16*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertToUINT16", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertToUINT16@4", dynlib: FreeImageLib.}
 proc FreeImage_ConvertToRGB16*(dib: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertToRGB16", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertToRGB16@4", dynlib: FreeImageLib.}
 proc FreeImage_ConvertToStandardType*(src: ptr FIBITMAP; scale_linear: BOOL): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertToStandardType", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertToStandardType@8", dynlib: FreeImageLib.}
 proc FreeImage_ConvertToType*(src: ptr FIBITMAP; dst_type: FREE_IMAGE_TYPE; 
                               scale_linear: BOOL): ptr FIBITMAP {.
-    importc: "FreeImage_ConvertToType", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ConvertToType@12", dynlib: FreeImageLib.}
 # tone mapping operators
 
 proc FreeImage_ToneMapping*(dib: ptr FIBITMAP; tmo: FREE_IMAGE_TMO; 
                             first_param: cdouble; second_param: cdouble): ptr FIBITMAP {.
-    importc: "FreeImage_ToneMapping", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ToneMapping@24", dynlib: FreeImageLib.}
 proc FreeImage_TmoDrago03*(src: ptr FIBITMAP; gamma: cdouble; exposure: cdouble): ptr FIBITMAP {.
-    importc: "FreeImage_TmoDrago03", dynlib: FreeImageLib.}
+    importc: "_FreeImage_TmoDrago03@20", dynlib: FreeImageLib.}
 proc FreeImage_TmoReinhard05*(src: ptr FIBITMAP; intensity: cdouble; 
                               contrast: cdouble): ptr FIBITMAP {.
-    importc: "FreeImage_TmoReinhard05", dynlib: FreeImageLib.}
+    importc: "_FreeImage_TmoReinhard05@20", dynlib: FreeImageLib.}
 proc FreeImage_TmoReinhard05Ex*(src: ptr FIBITMAP; intensity: cdouble; 
                                 contrast: cdouble; adaptation: cdouble; 
                                 color_correction: cdouble): ptr FIBITMAP {.
-    importc: "FreeImage_TmoReinhard05Ex", dynlib: FreeImageLib.}
+    importc: "_FreeImage_TmoReinhard05Ex@36", dynlib: FreeImageLib.}
 proc FreeImage_TmoFattal02*(src: ptr FIBITMAP; color_saturation: cdouble; 
                             attenuation: cdouble): ptr FIBITMAP {.
-    importc: "FreeImage_TmoFattal02", dynlib: FreeImageLib.}
+    importc: "_FreeImage_TmoFattal02@20", dynlib: FreeImageLib.}
 # ZLib interface -----------------------------------------------------------
 
 proc FreeImage_ZLibCompress*(target: ptr BYTE; target_size: DWORD; 
                              source: ptr BYTE; source_size: DWORD): DWORD {.
-    importc: "FreeImage_ZLibCompress", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ZLibCompress@16", dynlib: FreeImageLib.}
 proc FreeImage_ZLibUncompress*(target: ptr BYTE; target_size: DWORD; 
                                source: ptr BYTE; source_size: DWORD): DWORD {.
-    importc: "FreeImage_ZLibUncompress", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ZLibUncompress@16", dynlib: FreeImageLib.}
 proc FreeImage_ZLibGZip*(target: ptr BYTE; target_size: DWORD; source: ptr BYTE; 
                          source_size: DWORD): DWORD {.
-    importc: "FreeImage_ZLibGZip", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ZLibGZip@16", dynlib: FreeImageLib.}
 proc FreeImage_ZLibGUnzip*(target: ptr BYTE; target_size: DWORD; 
                            source: ptr BYTE; source_size: DWORD): DWORD {.
-    importc: "FreeImage_ZLibGUnzip", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ZLibGUnzip@16", dynlib: FreeImageLib.}
 proc FreeImage_ZLibCRC32*(crc: DWORD; source: ptr BYTE; source_size: DWORD): DWORD {.
-    importc: "FreeImage_ZLibCRC32", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ZLibCRC32@12", dynlib: FreeImageLib.}
 # --------------------------------------------------------------------------
 # Metadata routines --------------------------------------------------------
 # --------------------------------------------------------------------------
 # tag creation / destruction
 
-proc FreeImage_CreateTag*(): ptr FITAG {.importc: "FreeImage_CreateTag", 
+proc FreeImage_CreateTag*(): ptr FITAG {.importc: "_FreeImage_CreateTag@0",
     dynlib: FreeImageLib.}
-proc FreeImage_DeleteTag*(tag: ptr FITAG) {.importc: "FreeImage_DeleteTag", 
+proc FreeImage_DeleteTag*(tag: ptr FITAG) {.importc: "_FreeImage_DeleteTag@4",
     dynlib: FreeImageLib.}
 proc FreeImage_CloneTag*(tag: ptr FITAG): ptr FITAG {.
-    importc: "FreeImage_CloneTag", dynlib: FreeImageLib.}
+    importc: "_FreeImage_CloneTag@4", dynlib: FreeImageLib.}
 # tag getters and setters
 
 proc FreeImage_GetTagKey*(tag: ptr FITAG): cstring {.
-    importc: "FreeImage_GetTagKey", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetTagKey@4", dynlib: FreeImageLib.}
 proc FreeImage_GetTagDescription*(tag: ptr FITAG): cstring {.
-    importc: "FreeImage_GetTagDescription", dynlib: FreeImageLib.}
-proc FreeImage_GetTagID*(tag: ptr FITAG): WORD {.importc: "FreeImage_GetTagID", 
+    importc: "_FreeImage_GetTagDescription@4", dynlib: FreeImageLib.}
+proc FreeImage_GetTagID*(tag: ptr FITAG): WORD {.importc: "_FreeImage_GetTagID@4",
     dynlib: FreeImageLib.}
 proc FreeImage_GetTagType*(tag: ptr FITAG): FREE_IMAGE_MDTYPE {.
-    importc: "FreeImage_GetTagType", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetTagType@4", dynlib: FreeImageLib.}
 proc FreeImage_GetTagCount*(tag: ptr FITAG): DWORD {.
-    importc: "FreeImage_GetTagCount", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetTagCount@4", dynlib: FreeImageLib.}
 proc FreeImage_GetTagLength*(tag: ptr FITAG): DWORD {.
-    importc: "FreeImage_GetTagLength", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetTagLength@4", dynlib: FreeImageLib.}
 proc FreeImage_GetTagValue*(tag: ptr FITAG): pointer {.
-    importc: "FreeImage_GetTagValue", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetTagValue@4", dynlib: FreeImageLib.}
 proc FreeImage_SetTagKey*(tag: ptr FITAG; key: cstring): BOOL {.
-    importc: "FreeImage_SetTagKey", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetTagKey@8", dynlib: FreeImageLib.}
 proc FreeImage_SetTagDescription*(tag: ptr FITAG; description: cstring): BOOL {.
-    importc: "FreeImage_SetTagDescription", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetTagDescription@8", dynlib: FreeImageLib.}
 proc FreeImage_SetTagID*(tag: ptr FITAG; id: WORD): BOOL {.
-    importc: "FreeImage_SetTagID", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetTagID@8", dynlib: FreeImageLib.}
 proc FreeImage_SetTagType*(tag: ptr FITAG; typen: FREE_IMAGE_MDTYPE): BOOL {.
-    importc: "FreeImage_SetTagType", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetTagType@8", dynlib: FreeImageLib.}
 proc FreeImage_SetTagCount*(tag: ptr FITAG; count: DWORD): BOOL {.
-    importc: "FreeImage_SetTagCount", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetTagCount@8", dynlib: FreeImageLib.}
 proc FreeImage_SetTagLength*(tag: ptr FITAG; length: DWORD): BOOL {.
-    importc: "FreeImage_SetTagLength", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetTagLength@8", dynlib: FreeImageLib.}
 proc FreeImage_SetTagValue*(tag: ptr FITAG; value: pointer): BOOL {.
-    importc: "FreeImage_SetTagValue", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetTagValue@8", dynlib: FreeImageLib.}
 # iterator
 
 proc FreeImage_FindFirstMetadata*(model: FREE_IMAGE_MDMODEL; dib: ptr FIBITMAP; 
                                   tag: ptr ptr FITAG): ptr FIMETADATA {.
-    importc: "FreeImage_FindFirstMetadata", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FindFirstMetadata@12", dynlib: FreeImageLib.}
 proc FreeImage_FindNextMetadata*(mdhandle: ptr FIMETADATA; tag: ptr ptr FITAG): BOOL {.
-    importc: "FreeImage_FindNextMetadata", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FindNextMetadata@8", dynlib: FreeImageLib.}
 proc FreeImage_FindCloseMetadata*(mdhandle: ptr FIMETADATA) {.
-    importc: "FreeImage_FindCloseMetadata", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FindCloseMetadata@4", dynlib: FreeImageLib.}
 # metadata setter and getter
 
 proc FreeImage_SetMetadata*(model: FREE_IMAGE_MDMODEL; dib: ptr FIBITMAP; 
                             key: cstring; tag: ptr FITAG): BOOL {.
-    importc: "FreeImage_SetMetadata", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetMetadata@16", dynlib: FreeImageLib.}
 proc FreeImage_GetMetadata*(model: FREE_IMAGE_MDMODEL; dib: ptr FIBITMAP; 
                             key: cstring; tag: ptr ptr FITAG): BOOL {.
-    importc: "FreeImage_GetMetadata", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetMetadata@16", dynlib: FreeImageLib.}
 # helpers
 
 proc FreeImage_GetMetadataCount*(model: FREE_IMAGE_MDMODEL; dib: ptr FIBITMAP): cuint {.
-    importc: "FreeImage_GetMetadataCount", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetMetadataCount@8", dynlib: FreeImageLib.}
 proc FreeImage_CloneMetadata*(dst: ptr FIBITMAP; src: ptr FIBITMAP): BOOL {.
-    importc: "FreeImage_CloneMetadata", dynlib: FreeImageLib.}
+    importc: "_FreeImage_CloneMetadata@8", dynlib: FreeImageLib.}
 # tag to C string conversion
 
 proc FreeImage_TagToString*(model: FREE_IMAGE_MDMODEL; tag: ptr FITAG; 
                             Make: cstring): cstring {.
-    importc: "FreeImage_TagToString", dynlib: FreeImageLib.}
+    importc: "_FreeImage_TagToString@12", dynlib: FreeImageLib.}
 # --------------------------------------------------------------------------
 # Image manipulation toolkit -----------------------------------------------
 # --------------------------------------------------------------------------
@@ -1185,121 +1185,121 @@ proc FreeImage_TagToString*(model: FREE_IMAGE_MDMODEL; tag: ptr FITAG;
 #/ @deprecated see FreeImage_Rotate
 
 proc FreeImage_RotateClassic*(dib: ptr FIBITMAP; angle: cdouble): ptr FIBITMAP {.
-    importc: "FreeImage_RotateClassic", dynlib: FreeImageLib.}
+    importc: "_FreeImage_RotateClassic@12", dynlib: FreeImageLib.}
 proc FreeImage_Rotate*(dib: ptr FIBITMAP; angle: cdouble; bkcolor: pointer): ptr FIBITMAP {.
-    importc: "FreeImage_Rotate", dynlib: FreeImageLib.}
+    importc: "_FreeImage_Rotate@16", dynlib: FreeImageLib.}
 proc FreeImage_RotateEx*(dib: ptr FIBITMAP; angle: cdouble; x_shift: cdouble; 
                          y_shift: cdouble; x_origin: cdouble; y_origin: cdouble; 
                          use_mask: BOOL): ptr FIBITMAP {.
-    importc: "FreeImage_RotateEx", dynlib: FreeImageLib.}
+    importc: "_FreeImage_RotateEx@48", dynlib: FreeImageLib.}
 proc FreeImage_FlipHorizontal*(dib: ptr FIBITMAP): BOOL {.
-    importc: "FreeImage_FlipHorizontal", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FlipHorizontal@4", dynlib: FreeImageLib.}
 proc FreeImage_FlipVertical*(dib: ptr FIBITMAP): BOOL {.
-    importc: "FreeImage_FlipVertical", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FlipVertical@4", dynlib: FreeImageLib.}
 proc FreeImage_JPEGTransform*(src_file: cstring; dst_file: cstring; 
                               operation: FREE_IMAGE_JPEG_OPERATION; 
                               perfect: BOOL): BOOL {.
-    importc: "FreeImage_JPEGTransform", dynlib: FreeImageLib.}
+    importc: "_FreeImage_JPEGTransform@16", dynlib: FreeImageLib.}
 proc FreeImage_JPEGTransformU*(src_file: ptr uint16; dst_file: ptr uint16; 
                                operation: FREE_IMAGE_JPEG_OPERATION; 
                                perfect: BOOL): BOOL {.
-    importc: "FreeImage_JPEGTransformU", dynlib: FreeImageLib.}
+    importc: "_FreeImage_JPEGTransformU@16", dynlib: FreeImageLib.}
 # upsampling / downsampling
 
 proc FreeImage_Rescale*(dib: ptr FIBITMAP; dst_width: cint; dst_height: cint; 
                         filter: FREE_IMAGE_FILTER): ptr FIBITMAP {.
-    importc: "FreeImage_Rescale", dynlib: FreeImageLib.}
+    importc: "_FreeImage_Rescale@16", dynlib: FreeImageLib.}
 proc FreeImage_MakeThumbnail*(dib: ptr FIBITMAP; max_pixel_size: cint; 
                               convert: BOOL): ptr FIBITMAP {.
-    importc: "FreeImage_MakeThumbnail", dynlib: FreeImageLib.}
+    importc: "_FreeImage_MakeThumbnail@12", dynlib: FreeImageLib.}
 # color manipulation routines (point operations)
 
 proc FreeImage_AdjustCurve*(dib: ptr FIBITMAP; LUT: ptr BYTE; 
                             channel: FREE_IMAGE_COLOR_CHANNEL): BOOL {.
-    importc: "FreeImage_AdjustCurve", dynlib: FreeImageLib.}
+    importc: "_FreeImage_AdjustCurve@12", dynlib: FreeImageLib.}
 proc FreeImage_AdjustGamma*(dib: ptr FIBITMAP; gamma: cdouble): BOOL {.
-    importc: "FreeImage_AdjustGamma", dynlib: FreeImageLib.}
+    importc: "_FreeImage_AdjustGamma@12", dynlib: FreeImageLib.}
 proc FreeImage_AdjustBrightness*(dib: ptr FIBITMAP; percentage: cdouble): BOOL {.
-    importc: "FreeImage_AdjustBrightness", dynlib: FreeImageLib.}
+    importc: "_FreeImage_AdjustBrightness@12", dynlib: FreeImageLib.}
 proc FreeImage_AdjustContrast*(dib: ptr FIBITMAP; percentage: cdouble): BOOL {.
-    importc: "FreeImage_AdjustContrast", dynlib: FreeImageLib.}
-proc FreeImage_Invert*(dib: ptr FIBITMAP): BOOL {.importc: "FreeImage_Invert", 
+    importc: "_FreeImage_AdjustContrast@12", dynlib: FreeImageLib.}
+proc FreeImage_Invert*(dib: ptr FIBITMAP): BOOL {.importc: "_FreeImage_Invert@4",
     dynlib: FreeImageLib.}
 proc FreeImage_GetHistogram*(dib: ptr FIBITMAP; histo: ptr DWORD; 
                              channel: FREE_IMAGE_COLOR_CHANNEL): BOOL {.
-    importc: "FreeImage_GetHistogram", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetHistogram@12", dynlib: FreeImageLib.}
 proc FreeImage_GetAdjustColorsLookupTable*(LUT: ptr BYTE; brightness: cdouble; 
     contrast: cdouble; gamma: cdouble; invert: BOOL): cint {.
-    importc: "FreeImage_GetAdjustColorsLookupTable", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetAdjustColorsLookupTable@32", dynlib: FreeImageLib.}
 proc FreeImage_AdjustColors*(dib: ptr FIBITMAP; brightness: cdouble; 
                              contrast: cdouble; gamma: cdouble; invert: BOOL): BOOL {.
-    importc: "FreeImage_AdjustColors", dynlib: FreeImageLib.}
+    importc: "_FreeImage_AdjustColors@32", dynlib: FreeImageLib.}
 proc FreeImage_ApplyColorMapping*(dib: ptr FIBITMAP; srccolors: ptr RGBQUAD; 
                                   dstcolors: ptr RGBQUAD; count: cuint; 
                                   ignore_alpha: BOOL; swap: BOOL): cuint {.
-    importc: "FreeImage_ApplyColorMapping", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ApplyColorMapping@24", dynlib: FreeImageLib.}
 proc FreeImage_SwapColors*(dib: ptr FIBITMAP; color_a: ptr RGBQUAD; 
                            color_b: ptr RGBQUAD; ignore_alpha: BOOL): cuint {.
-    importc: "FreeImage_SwapColors", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SwapColors@16", dynlib: FreeImageLib.}
 proc FreeImage_ApplyPaletteIndexMapping*(dib: ptr FIBITMAP; 
     srcindices: ptr BYTE; dstindices: ptr BYTE; count: cuint; swap: BOOL): cuint {.
-    importc: "FreeImage_ApplyPaletteIndexMapping", dynlib: FreeImageLib.}
+    importc: "_FreeImage_ApplyPaletteIndexMapping@20", dynlib: FreeImageLib.}
 proc FreeImage_SwapPaletteIndices*(dib: ptr FIBITMAP; index_a: ptr BYTE; 
                                    index_b: ptr BYTE): cuint {.
-    importc: "FreeImage_SwapPaletteIndices", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SwapPaletteIndices@12", dynlib: FreeImageLib.}
 # channel processing routines
 
 proc FreeImage_GetChannel*(dib: ptr FIBITMAP; channel: FREE_IMAGE_COLOR_CHANNEL): ptr FIBITMAP {.
-    importc: "FreeImage_GetChannel", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetChannel@8", dynlib: FreeImageLib.}
 proc FreeImage_SetChannel*(dst: ptr FIBITMAP; src: ptr FIBITMAP; 
                            channel: FREE_IMAGE_COLOR_CHANNEL): BOOL {.
-    importc: "FreeImage_SetChannel", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetChannel@12", dynlib: FreeImageLib.}
 proc FreeImage_GetComplexChannel*(src: ptr FIBITMAP; 
                                   channel: FREE_IMAGE_COLOR_CHANNEL): ptr FIBITMAP {.
-    importc: "FreeImage_GetComplexChannel", dynlib: FreeImageLib.}
+    importc: "_FreeImage_GetComplexChannel@8", dynlib: FreeImageLib.}
 proc FreeImage_SetComplexChannel*(dst: ptr FIBITMAP; src: ptr FIBITMAP; 
                                   channel: FREE_IMAGE_COLOR_CHANNEL): BOOL {.
-    importc: "FreeImage_SetComplexChannel", dynlib: FreeImageLib.}
+    importc: "_FreeImage_SetComplexChannel@12", dynlib: FreeImageLib.}
 # copy / paste / composite routines
 
 proc FreeImage_Copy*(dib: ptr FIBITMAP; left: cint; top: cint; right: cint; 
-                     bottom: cint): ptr FIBITMAP {.importc: "FreeImage_Copy", 
+                     bottom: cint): ptr FIBITMAP {.importc: "_FreeImage_Copy@20",
     dynlib: FreeImageLib.}
 proc FreeImage_Paste*(dst: ptr FIBITMAP; src: ptr FIBITMAP; left: cint; 
                       top: cint; alpha: cint): BOOL {.
-    importc: "FreeImage_Paste", dynlib: FreeImageLib.}
+    importc: "_FreeImage_Paste@20", dynlib: FreeImageLib.}
 proc FreeImage_Composite*(fg: ptr FIBITMAP; useFileBkg: BOOL; 
                           appBkColor: ptr RGBQUAD; bg: ptr FIBITMAP): ptr FIBITMAP {.
-    importc: "FreeImage_Composite", dynlib: FreeImageLib.}
+    importc: "_FreeImage_Composite@16", dynlib: FreeImageLib.}
 proc FreeImage_JPEGCrop*(src_file: cstring; dst_file: cstring; left: cint; 
                          top: cint; right: cint; bottom: cint): BOOL {.
-    importc: "FreeImage_JPEGCrop", dynlib: FreeImageLib.}
+    importc: "_FreeImage_JPEGCrop@24", dynlib: FreeImageLib.}
 proc FreeImage_JPEGCropU*(src_file: ptr uint16; dst_file: ptr uint16; 
                           left: cint; top: cint; right: cint; bottom: cint): BOOL {.
-    importc: "FreeImage_JPEGCropU", dynlib: FreeImageLib.}
+    importc: "_FreeImage_JPEGCropU@24", dynlib: FreeImageLib.}
 proc FreeImage_PreMultiplyWithAlpha*(dib: ptr FIBITMAP): BOOL {.
-    importc: "FreeImage_PreMultiplyWithAlpha", dynlib: FreeImageLib.}
+    importc: "_FreeImage_PreMultiplyWithAlpha@4", dynlib: FreeImageLib.}
 # background filling routines
 
 proc FreeImage_FillBackground*(dib: ptr FIBITMAP; color: pointer; options: cint): BOOL {.
-    importc: "FreeImage_FillBackground", dynlib: FreeImageLib.}
+    importc: "_FreeImage_FillBackground@12", dynlib: FreeImageLib.}
 proc FreeImage_EnlargeCanvas*(src: ptr FIBITMAP; left: cint; top: cint; 
                               right: cint; bottom: cint; color: pointer; 
                               options: cint): ptr FIBITMAP {.
-    importc: "FreeImage_EnlargeCanvas", dynlib: FreeImageLib.}
+    importc: "_FreeImage_EnlargeCanvas@28", dynlib: FreeImageLib.}
 proc FreeImage_AllocateEx*(width: cint; height: cint; bpp: cint; 
                            color: ptr RGBQUAD; options: cint; 
                            palette: ptr RGBQUAD; red_mask: cuint; 
                            green_mask: cuint; blue_mask: cuint): ptr FIBITMAP {.
-    importc: "FreeImage_AllocateEx", dynlib: FreeImageLib.}
+    importc: "_FreeImage_AllocateEx@36", dynlib: FreeImageLib.}
 proc FreeImage_AllocateExT*(typen: FREE_IMAGE_TYPE; width: cint; height: cint; 
                             bpp: cint; color: pointer; options: cint; 
                             palette: ptr RGBQUAD; red_mask: cuint; 
                             green_mask: cuint; blue_mask: cuint): ptr FIBITMAP {.
-    importc: "FreeImage_AllocateExT", dynlib: FreeImageLib.}
+    importc: "_FreeImage_AllocateExT@40", dynlib: FreeImageLib.}
 # miscellaneous algorithms
 
 proc FreeImage_MultigridPoissonSolver*(Laplacian: ptr FIBITMAP; ncycle: cint): ptr FIBITMAP {.
-    importc: "FreeImage_MultigridPoissonSolver", dynlib: FreeImageLib.}
+    importc: "_FreeImage_MultigridPoissonSolver@8", dynlib: FreeImageLib.}
 
 {.pop.}
